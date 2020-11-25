@@ -15,28 +15,17 @@ function CategoryDetail (props) {
 
     return (
         <>
-            <h1>{category}</h1>
+            {/* <div className="col-6 d-flex justify-content-center" > */}
 
-            <div className="col-6 d-flex justify-content-center" >
                 <div style={{width: '25rem', height: '28rem'}}>
-
-                    {/* <label style={{fontSize: '13px'}}>Category: </label>
-                    <select className='mx-2' style={{fontSize: '13px'}}>
-                        <option disabled>select...</option>
-                        <option>Programming</option>
-                        <option>Miscellaneous</option>
-                        <option>Dark</option>
-                        <option>Pun</option>
-                        <option>Spooky</option>
-                        <option>Christmas</option>
-                    </select> */}
-                    <div onClick={() => doRandomThings()} type='button' className='float-right' style={{fontSize: '13px'}}>
+                    <label className='font-weight-bold' >{category}</label>
+                    <div onClick={() => doRandomThings()} type='button' className='float-right randomHover ' style={{fontSize: '13px'}}>
                     New Jokes
                     <i className="fas fa-sync-alt mx-2" ></i>
                     </div>
 
 
-                    <div className="d-flex flex-wrap align-items-center justify-content-center" style={{width: '26.5rem', height: '28rem', overflowY: 'auto'}}>
+                    <div className="d-flex flex-wrap align-items-center justify-content-center scrollbar scrollbar-black bordered-black square thin" style={{width: '26.5rem', height: '28rem', overflowY: 'auto'}}>
                     {dataCategory && dataCategory.jokes && loadingCategory === false &&
                         dataCategory.jokes.map(joke => {
                         joke.favourite = false
@@ -45,11 +34,14 @@ function CategoryDetail (props) {
                     }
                     {loadingCategory === true &&
                         // <h1>Loading</h1>
-                        <img src={loadingText} alt="" style={{width: '24rem', height: '26rem', objectFit: 'contain'}}/>
+                        <div className='text-center'>
+                            <img src={loadingText} alt="" style={{width: '24rem', height: '26rem', objectFit: 'contain', marginBottom: '-3.5rem'}}/>
+                            <h4>Loading</h4>
+                        </div>
                     }
                     </div>
                 </div>
-            </div>
+            {/* </div> */}
         </>
     )
 }
