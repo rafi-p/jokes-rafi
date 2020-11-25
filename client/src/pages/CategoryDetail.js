@@ -39,6 +39,7 @@ function CategoryDetail (props) {
                     <div className="d-flex flex-wrap align-items-center justify-content-center" style={{width: '26.5rem', height: '28rem', overflowY: 'auto'}}>
                     {dataCategory && dataCategory.jokes && loadingCategory === false &&
                         dataCategory.jokes.map(joke => {
+                        joke.favourite = false
                         return <Jokes joke={joke} key={joke.id}/>
                         })
                     }

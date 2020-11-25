@@ -9,6 +9,7 @@ function Home (props) {
 
     const [dataMeme, loadingMeme, randomMeme] = useFetch('https://meme-api.herokuapp.com/gimme')
 
+
     const doRandomThings = useCallback(() => {
         randomJoke('https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist&type=twopart&idRange=0-200&amount=10')
         randomMeme('https://meme-api.herokuapp.com/gimme')
@@ -52,6 +53,7 @@ function Home (props) {
                             <div className="d-flex flex-wrap align-items-center justify-content-center" style={{width: '26.5rem', height: '28rem', overflowY: 'auto'}}>
                             {dataJokes && dataJokes.jokes && loadingJoke === false &&
                                 dataJokes.jokes.map(joke => {
+                                joke.favourite = false
                                 return <Jokes joke={joke} key={joke.id}/>
                                 })
                             }
