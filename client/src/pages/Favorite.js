@@ -1,13 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Jokes from '../components/jokes.js'
-import loading1 from '../assets/undraw_Faq_re_31cw.svg'
+import playGif from '../assets/animation_500_khy7a2c5.gif'
 
 function Favorite (props) {
-    const favorites = useSelector((state) => state.favorites)
+    const favorites = useSelector((state) => state.favorites.favorites)
     return (
         <>
-            <div className='row d-flex justify-content-center mt-3' style={{marginRight: '0px'}}>
+            <div className='row d-flex justify-content-center mt-3  animate__animated animate__fadeIn' style={{marginRight: '0px'}}>
                 <div className="col-6 d-flex justify-content-center" style={{    display: 'flex!important'}} >
                     <div style={{width: '25rem', height: '28rem'}}>
                         <label className='font-weight-bold' >Favorite</label>
@@ -19,8 +19,8 @@ function Favorite (props) {
                         }
 
                         {favorites.length === 0 &&
-                            <div className='text-center'>
-                                <img src={loading1} alt="" style={{width: '24rem', height: '26rem', objectFit: 'contain', marginBottom: '-3rem'}}/>
+                            <div className='text-center  animate__animated animate__fadeIn mt-4'>
+                                 <img  src={playGif} alt="" style={{width: '18rem', height: '20rem', objectFit: 'contain'}}/><br></br>
                                 <label className='font-weight-bold' >No Favorites yet</label>
                             </div>
                         }

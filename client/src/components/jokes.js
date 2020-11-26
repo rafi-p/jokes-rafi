@@ -20,7 +20,7 @@ function Jokes (props) {
 
     const { joke } = props
     return (
-        <div className="card mb-2 shadow-sm" style={{width:'25rem'}}>
+        <div className="card mb-2 shadow-sm animate__animated animate__fadeIn" style={{width:'25rem'}}>
             <div className="card-body">
                 { joke.favourite === true &&
                     <i className="fas fa-star float-right" type='button' onClick={() => removeFromFavorite(joke)}></i>

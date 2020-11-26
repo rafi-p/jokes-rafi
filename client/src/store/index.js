@@ -1,24 +1,71 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
+import reducer from './reducers/index'
 
-const initialState = {
-    favorites: []
-}
 
-function reducer(state = initialState, action) {
-    switch (action.type) {
-        case "ADD_FAVORITE":
-            action.payload.joke.favourite = true
-            const newFavorites = state.favorites.concat(action.payload.joke);
-          return { ...state, favorites: newFavorites };
-        case "REMOVE_FAVORITE":
-            action.payload.joke.favourite = false
-            const removeFavorites = state.favorites.filter(favorite => favorite !== action.payload.joke);
-            return { ...state, favorites: removeFavorites };
-        default:
-          return state;
-      }
-}
+export const randomJokes = (urlRandom) => {
+    return (dispatch) => {
+        dispatch({ type: 'SET_LOADING_JOKES', payload: true })
+        fetch(urlRandom, {
+            method: 'GET'
+          })
+            .then(res => {
+              if(res.ok) {
+                return res.json()
+              } else {
+                return Promise.reject({
+                  status: res.status,
+                  statusText: res.statusText
+                })
+              }
+            })
+            .then(data => {
+              dispatch({ type: 'SET_DATA_JOKES', payload: data })
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              dispatch({ type: 'SET_ERROR_JOKES', payload: error })
+            })
+            .finally(() => {
+                dispatch({ type: 'SET_LOADING_JOKES', payload: false })
+              });
+    }
+  }
 
-const store = createStore(reducer)
+  export const randomMemes = (urlRandom) => {
+    return (dispatch) => {
+        dispatch({ type: 'SET_LOADING_MEMES', payload: true })
+        fetch(urlRandom, {
+            method: 'GET'
+          })
+            .then(res => {
+              if(res.ok) {
+                return res.json()
+              } else {
+                return Promise.reject({
+                  status: res.status,
+                  statusText: res.statusText
+                })
+              }
+            })
+            .then(data => {
+              dispatch({ type: 'SET_DATA_MEMES', payload: data })
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              dispatch({ type: 'SET_ERROR_MEMES', payload: error })
+            })
+            .finally(() => {
+                dispatch({ type: 'SET_LOADING_MEMES', payload: false })
+              });
+    }
+  }
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+    reducer,
+    composeEnhancers(applyMiddleware(thunk))
+)
 
 export default store

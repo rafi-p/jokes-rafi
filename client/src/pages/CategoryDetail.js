@@ -1,17 +1,38 @@
 import React, { useCallback } from 'react'
 import loadingText from '../assets/animation_500_khvpggp3.gif'
+import errorGif from '../assets/animation_500_khy7yy9i.gif'
 import Jokes from '../components/jokes.js'
 import { useParams } from 'react-router-dom'
-import useFetch from '../helpers/useFetcher'
+import { randomJokes } from '../store/index'
+import { useSelector, useDispatch } from 'react-redux'
 
 function CategoryDetail (props) {
     const {category} = useParams()
+    const dispatch = useDispatch()
 
-    const [dataCategory, loadingCategory, randomCategory] = useFetch(`https://sv443.net/jokeapi/v2/joke/${category}?blacklistFlags=nsfw,religious,political,racist,sexist&type=twopart&idRange=0-200&amount=10`)
+    const dataCategory = useSelector((state) => state.jokes.data)
+    const loadingCategory = useSelector((state) => state.jokes.loading)
+    const errorCategory = useSelector((state) => state.jokes.error)
+
 
     const doRandomThings = useCallback(() => {
-        randomCategory(`https://sv443.net/jokeapi/v2/joke/${category}?blacklistFlags=nsfw,religious,political,racist,sexist&type=twopart&idRange=0-200&amount=10`)
-    },[randomCategory, category])
+        dispatch(randomJokes(`https://sv443.net/jokeapi/v2/joke/${category}?blacklistFlags=nsfw,religious,political,racist,sexist&type=twopart&idRange=0-200&amount=10`))
+    },[dispatch, category])
+
+    if (errorCategory) {
+        return (
+            <section className="container pt-3 animate__animated animate__fadeIn">
+                <div className='container' style={{maxWidth: '1025px'}}>
+                    <div className="row d-flex justify-content-center align-items-center">
+                        <div className='text-center animate__animated animate__fadeIn'>
+                            <img src={errorGif} alt="" style={{width: '350px', height: '350px', objectFit: 'contain', marginBottom: '0rem'}}/>
+                            <h4>Error.</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
 
     return (
         <>
@@ -33,8 +54,7 @@ function CategoryDetail (props) {
                         })
                     }
                     {loadingCategory === true &&
-                        // <h1>Loading</h1>
-                        <div className='text-center'>
+                        <div className='text-center  animate__animated animate__fadeIn'>
                             <img src={loadingText} alt="" style={{width: '24rem', height: '26rem', objectFit: 'contain', marginBottom: '-3.5rem'}}/>
                             <h4>Loading</h4>
                         </div>
