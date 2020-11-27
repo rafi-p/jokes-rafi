@@ -53,7 +53,7 @@ function Category (props) {
                         <div className="col-6 d-flex justify-content-center" >
 
                             <div className="btn-group" style={{position: 'absolute'}}>
-                                <label style={{fontSize: '13px'}}>Category</label>
+                                <label data-testid='category-title' style={{fontSize: '13px'}}>Category</label>
                                 <label type="button" className="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 </label>
                                 <div className="dropdown-menu">

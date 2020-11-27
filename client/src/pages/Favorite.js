@@ -10,7 +10,7 @@ function Favorite (props) {
             <div className='row d-flex justify-content-center mt-3  animate__animated animate__fadeIn' style={{marginRight: '0px'}}>
                 <div className="col-6 d-flex justify-content-center" style={{    display: 'flex!important'}} >
                     <div style={{width: '25rem', height: '28rem'}}>
-                        <label className='font-weight-bold' >Favorite</label>
+                        <label data-testid='favorite-title' className='font-weight-bold' >Favorite</label>
                         <div className=" flex-wrap align-items-center  justify-content-center scrollbar scrollbar-black bordered-black square thin" style={{width: '26.5rem', height: '28rem', overflowY: 'auto'}}>
                         {favorites.length > 0 &&
                             favorites.map(favorite => {

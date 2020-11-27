@@ -71,7 +71,7 @@ function Home (props) {
 
                     <div className="col-6 d-flex justify-content-center" >
                         <div style={{width: '25rem', height: '28rem'}}>
-                        <label className='font-weight-bold' >Jokes Quote</label>
+                        <label className='font-weight-bold' data-testid='jokes-title' >Jokes Quote</label>
 
                             <div onClick={() => doRandomThings()} type='button' className='float-right text-white randomHover' style={{fontSize: '13px'}}>
                             New Jokes
